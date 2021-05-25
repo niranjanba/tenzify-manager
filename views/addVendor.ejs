@@ -1,0 +1,81 @@
+<%- include('partials/header') %> 
+<section class="container">
+        <h1>Add Vendor</h1>
+            <div>
+            <form action="/add-vendor" class="add-form" method='post' enctype="multipart/form-data">
+                <h4>Vendor Details</h4>
+                <label class="form-label" for="name">Enter vendor name:</label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Enter Vendor Name" required>
+
+                <label class="form-label" for="email">Enter Vendor Email:</label>
+                <input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" required>
+
+                <label class="form-label" for="store-name">Enter vendor store name:</label>
+                <input class="form-control" type="text" name="storeName" id="store-name" placeholder="Enter Vendor's store name" required>
+
+                <label class="form-label" for="sotre-address">Enter vendor store address:</label>
+                <textarea name="address" class="form-control" id="store-address" placeholder="Enter Store Address" rows="5" required></textarea>
+
+                <label class="form-label" for="amound">Total Amound</label>
+                <input type="number" name="total" class="form-control" placeholder="Enter the Total Amount" required>
+
+                <label class="form-label" for="advance">Amount Paid</label>
+                <input type="number" name="paid" class="form-control" placeholder="Enter Advance paid" required>
+
+                <label class="form-label" for="balance">Balance Amount</label>
+                <input type="number" value="" class="form-control"  name="balance" placeholder="Balance amount" readonly>
+
+                <label class="form-label" for="phone">Enter vendor phone number:</label>
+                <input class="form-control" type="number" name="phone" minlength="10" maxlength="10" id="phone" placeholder="Enter vendor phone number" required>
+
+                <label class="form-label" for="gstin">Vendor GSTIN</label>
+                <input class="form-control" type="text" id="gstin" placeholder="Enter GSTIN" name="gstin" required>
+
+                <h4>Bank Details</h4>
+                <label class="form-label" for="accountName">Account Name:</label>
+                <input type="text" id="accountName" placeholder="Enter Account Name" name="bank[accountName]" class="form-control" required>
+
+                <label class="form-label" for="accountBank">Account Bank Name:</label>
+                <input type="text" name="bank[accountBank]" placeholder="Account Bank Name" class="form-control" id="accountBank" required>
+
+                <label class="form-label" for="accountIFSC">IFSC CODE:</label>
+                <input type="text" name="bank[accountIFSC]" placeholder="IFSC" class="form-control" id="accountIFSC"  required>
+
+                <label class="form-label" for="accountNumber">Account Number:</label>
+                <input type="text" name="bank[accountNumber]" placeholder="Account Number" class="form-control" id="accountNumber" required>
+
+                <div class="mb-3">
+                    <label for="formFileSm" class="form-label">Upload Aadhaar:</label>
+                    <input name="image" class="form-control form-control-sm" id="formFileSm" type="file">
+                </div>
+
+                <div class="mb-3">
+                    <label for="pan" class="form-label">Upload Pan:</label>
+                    <input name="image" class="form-control form-control-sm" id="pan" type="file">
+                </div>
+
+                <button class="btn btn-primary" style="margin-bottom: 20px;">Add Vendor</button>
+            </div>
+        </form>
+    </section>
+    <script>
+        //add vendor amount
+        const form = document.querySelector('.add-form');
+        const inputs = form.querySelectorAll('input');
+        const totalInput = inputs[3];
+        const paidInput = inputs[4];
+        let amount = 0;
+
+        totalInput.addEventListener("change",()=>{
+            amount = totalInput.value;
+        })
+
+        paidInput.addEventListener('change',()=>{
+            amount = amount - paidInput.value;
+            inputs[5].value = amount;
+        })
+        inputs[10].addEventListener('input',()=>{
+            inputs[10].value = inputs[10].value.toUpperCase();
+        })
+    </script>
+<%- include('./partials/footer') %> 

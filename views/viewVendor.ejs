@@ -1,0 +1,101 @@
+<%- include('partials/header') %> 
+
+     <main>
+        <section class="vendor-info">
+            <div class="vendor-display">
+                <div class="vendor-details">
+                    <h5 class="vendor store-name">Store Name: <%= vendor.storeName %></h5>
+                    <h6 class="vendor name-display">Name: <%= vendor.name %></h6>
+                    <h6 class="vendor store-address">Address: <%= vendor.address %></h6>
+                    <h6 class="vendor phone-number">Phone Number: <%= vendor.phone %></h6>
+                    <h6 class="vendor gstin">GSTIN: <%= vendor.gstin %></h6>
+                </div>
+                <div class="vendor-details">
+                    <h5>Bank Details</h5>
+                    <h6>Ac Name: <%= vendor.bank.accountName %></h6>
+                    <h6>Bank Name: <%= vendor.bank.accountBank %></h6>
+                    <h6>Ac IFSC: <%= vendor.bank.accountIFSC %></h6>
+                    <h6>Ac Number: <%= vendor.bank.accountNumber %></h6>
+                </div>
+                <div>
+                    <% for(image of vendor.images){ %>
+                <img style="height: 200px;" src="<%= image.url %>" alt="">
+                <% } %> 
+                </div>
+            </div>
+            <div class="vendor-buttons">
+                <h5>Paid Amount - <%= vendor.paid %></h5>
+                <h5>Total Amount - <%= vendor.total %></h5>
+                <h5>Balance - <%= vendor.total - vendor.paid %></h5>
+                <h5>Total Products - <%= products.length %></h5>
+                <button onclick="addProduct()" data-vendor="<%= vendor._id %>" class="add-product btn btn-secondary">Add Product</button>
+                <form action="/vendor/<%= vendor._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-secondary">DELETE</button>
+                </form>
+                <form action="/view-vendor/edit/<%= vendor._id %>">
+                <button class="btn btn-secondary">EDIT</button></form>
+            </div>
+            <section class="products-info">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sl-No</th>
+                            <th>Name</th>
+                            <th>Price(Rs)</th>
+                            <th>Quantity</th>
+                            <th>Category</th>
+                            <th>SKU</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(product of products){ %> 
+                        <tr>
+                            <td></td>
+                            <td><%= product.name %> </td>
+                            <td><%= product.price %> </td>
+                            <td><%= product.quantity %> </td>
+                            <td><%= product.category %> </td>
+                            <td><%= product.sku %> </td>
+                            <td>
+                                <form action="/vendor/<%= vendor._id %>/product/<%= product.id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-secondary">DELETE</button>
+                                </form>
+                                <button style="margin-top: 5px;" onclick="editProduct(this)" class="edit-form btn btn-secondary" data-id="<%= product.id %>">EDIT</button>
+                            </td>
+                        </tr>
+                        <% } %> 
+                    </tbody>
+                </table>
+            </section>
+        </section> 
+        <div style="display: none;" class="bg-modal">
+            <div class="content-modal">
+                <div class="content-data">
+                    <form class="vendor-form modal-form">
+                        <div class="mb-3">
+                        <label class="form-label" for="name">Enter Product Name:</label>
+                        <input class="form-control" type="text" name="name" value="" id="name" placeholder="Enter Name" required>
+
+                        <label class="form-label" for="email">Enter Product Price:</label>
+                        <input class="form-control" type="number" name="price" value="" id="email" placeholder="Enter Price" required>
+
+                        <label class="form-label" for="phone">Enter Product Quantity:</label>
+                        <input class="form-control" type="number" name="quantity" value="" id="phone" placeholder="Enter Quantity" required>
+
+                        <label class="form-label" for="store-name">Select Product Category:</label>
+                        <select class="form-select" name="category" id="category" required>
+                            <% for(category of categories){ %>
+                                <option value="<%= category %>"><%= category %></option>
+                                <% } %> 
+                        </select> 
+                        <button class="btn btn-primary" type="submit">Update Product</button>
+                        <span onclick="myFunction()" class="modal-close">+</span>
+                        </div>
+                    </form>
+            </div>
+        </div>
+        </div>
+     </main>
+     <script src="/js/edit.js"></script>
+<%- include('./partials/footer') %> 

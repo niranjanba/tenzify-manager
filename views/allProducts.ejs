@@ -1,0 +1,79 @@
+<%- include('./partials/header') %>
+
+<div class="container">
+    <h4>Filter:</h4>
+    <form action="/view-all-products" method="POST">
+        <div class="filter-products">
+            <select class="form-select" name="category">
+                <% for(category of categories){ %>
+                    <option class="form-select" value="<%= category %>"><%= category %></option>
+                    <% } %> 
+            </select> 
+            <button class="btn btn-primary">filter</button>
+        </div>
+    </form>
+    <section class="products-info">
+        <table >
+            <thead>
+                <tr>
+                    <th scope="col">Sl-No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price(Rs)</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(product of products){ %> 
+                <tr>
+                    <td></td>
+                    <td><%= product.name %> </td>
+                    <td><%= product.price %> </td>
+                    <td><%= product.quantity %> </td>
+                    <td><%= product.category %> </td>
+                    <td><%= product.sku %> </td>
+                    <td>
+                        <div class="td-action-btn">
+                                <button data-vendor="<%= product.vendor %>" data-id="<%= product.id %>" onclick="deleteProduct(this)" class="btn btn-secondary delete-btn">Delete</button>
+                                <button onclick="editProduct(this)" class="edit-form btn btn-secondary" data-id="<%= product.id %>">Edit</button>
+                                <form action="/view-vendor/<%= product.vendor %>" method="GET">
+                                    <button class="btn btn-secondary">Vendor</button>
+                                </form>
+                        </div>
+                    </td>
+                </tr>
+                <% } %> 
+            </tbody>
+        </table>
+    </section>
+</div>
+<div style="display: none;" class="bg-modal">
+        <div class="content-modal">
+            <div class="content-data">
+                <form class="vendor-form modal-form">
+                    <div class="mb-3">
+                    <label class="form-label" for="name">Enter Product Name:</label>
+                    <input class="form-control" type="text" name="name" value="" id="name" placeholder="Enter Name" required>
+
+                    <label class="form-label" for="email">Enter Product Price:</label>
+                    <input class="form-control" type="number" name="price" value="" id="email" placeholder="Enter Price" required>
+
+                    <label class="form-label" for="phone">Enter Product Quantity:</label>
+                    <input class="form-control" type="number" name="quantity" value="" id="phone" placeholder="Enter Quantity" required>
+
+                    <label class="form-label" for="store-name">Select Product Category:</label>
+                    <select class="form-select" name="category" id="category" required>
+                        <% for(category of categories){ %>
+                            <option value="<%= category %>"><%= category %></option>
+                            <% } %> 
+                    </select> 
+                    <button class="btn btn-primary" type="submit">Update Product</button>
+                    <span onclick="myFunction()" class="modal-close">+</span>
+                    </div>
+                </form>
+        </div>
+    </div>
+
+<script src="/js/editProduct.js"></script>

@@ -1,0 +1,67 @@
+<%- include('partials/header') %> 
+
+    <h1>Edit vendor</h1>
+    <section class="container">
+        <div class="row justify-content-center">
+        <div class="col-4">
+            <form class="vendor-form" action="/view-vendor/edit/<%= vendor._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <label class="form-label" for="name">vendor name:</label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Enter Vendor Name" value="<%= vendor.name %>" required>
+
+                <label class="form-label" for="email">Vendor Email:</label>
+                <input class="form-control" type="email" name="email" id="email" placeholder="Enter Email" value="<%= vendor.email %>" required>
+
+                <label class="form-label" for="store-name">vendor store name:</label>
+                <input class="form-control" type="text" name="storeName" id="store-name" placeholder="Enter Vendor's store name" value="<%= vendor.storeName %>" required>
+
+                <label class="form-label" for="sotre-address">vendor store address:</label>
+                <textarea class="form-control" name="address" id="store-address" placeholder="Enter Store Address" rows="5" required><%= vendor.address %></textarea>
+
+                <label class="form-label" for="amound">Total Amound</label>
+                <input type="number" name="total" class="form-control" placeholder="Enter the Total Amount" value="<%= vendor.total %>" required>
+
+                <label class="form-label" for="advance">Paid Amount</label>
+                <input type="number" name="paid" class="form-control" placeholder="Enter Advance paid" value="<%= vendor.paid %>" required>
+
+                <label class="form-label" for="balance">Balance Amount</label>
+                <input type="number" value="" class="form-control" name="balance" placeholder="Balance amount" readonly>
+
+                <label class="form-label" for="phone">vendor phone number:</label>
+                <input class="form-control" type="number" name="phone" id="phone" placeholder="Enter vendor phone number" value="<%= vendor.phone %>">
+
+                <label class="form-label" for="gstin">Vendor GSTIN</label>
+                <input class="form-control" type="text" id="gstin" placeholder="Enter GSTIN" name="gstin" value="<%= vendor.gstin %>">
+
+                <label class="form-label" for="aadhaar">Aadhaar</label>
+                <input type="file" id="aadhaar" class="form-control form-control-sm" name="image" required>
+
+                <label class="form-label" for="pan">Pan</label>
+                <input type="file" id="pan" class="form-control form-control-sm" name="image" required>
+
+                <% vendor.images.forEach((img, i)=>{ %>
+                      <img style="height: 400px; margin-top: 10px;" class="img-fluid img-thumbnail" src="<%= img.url %>" alt="image">
+                      <label class="form-label" for="image-<%= i %>">Delete?</label>
+                      <input id="image-<%= i %>" type="checkbox" name="deleteImages[]" value="<%= img.filename %>">
+                <% }) %> 
+                <button class="btn btn-primary">Update Vendor</button>
+            </form>
+        </div>
+        </div>
+    </section>
+    <script>
+        //add vendor amount
+        const inputs = document.querySelectorAll('input');
+        const totalInput = inputs[3];
+        const paidInput = inputs[4];
+        let amount = 0;
+
+        totalInput.addEventListener("change",()=>{
+            amount = totalInput.value;
+        })
+
+        paidInput.addEventListener('change',()=>{
+            amount = amount - paidInput.value;
+            inputs[5].value = amount;
+        })
+    </script>
+<%- include('./partials/footer.ejs') %> 
