@@ -230,6 +230,8 @@ app.post('/view-vendor/:id/product',isLoggedIn,async (req, res) => {
     res.redirect(`/view-vendor/${id}`);
 })
 
-app.listen('3000', () => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
     console.log('SERVER IS UP AND RUNNING!');
 })
