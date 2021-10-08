@@ -13,6 +13,12 @@ let id;
 let table;
 let edit = false;
 
+
+//delete product
+function deleteProduct() {
+    document.querySelector('.delete-vendor-form').sumbit();
+}
+
 function editProduct(data) {
     edit = true;
     let category = modalForm.querySelector('select');

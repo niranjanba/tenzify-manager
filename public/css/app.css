@@ -20,7 +20,6 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid;
     margin-top: 20px;
     /* padding: 20px; */
 }
@@ -51,14 +50,11 @@
 }
 
 .vendor-buttons{
-    width: 90%;
-    margin: 10px auto;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
 }
-.vendor-buttons button{
-    padding: 5px;
-}
+
 
 /* ADD VENDOR */
 .add-form{

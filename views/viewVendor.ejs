@@ -3,7 +3,61 @@
      <main>
         <section class="vendor-info">
             <div class="vendor-display">
-                <div class="vendor-details">
+                <section>
+                    <div class="card mb-3" style="max-width: 1020px;">
+                        <div class="row no-gutters">
+                            <div class="col-sm-4 row justify-content-center p-4">
+                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                        <img src="<%= vendor.images[0].url %>" class="d-block w-100" alt="...">
+                                        </div>
+                                        <div class="carousel-item">
+                                        <img src="<%= vendor.images[1].url %>" class="d-block w-100" alt="...">
+                                        </div>
+                                    </div>
+                                    <a style="color: gray;" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span  class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span style="color: gray;" class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    </a>
+                                </div>
+                                <div style="margin-top: 10px;" class="vendor-buttons">
+                                <a href="/view-vendor/edit/<%= vendor._id %>" class="btn btn-sm btn-primary">Edit</a>
+                                <a onclick="addProduct()" data-vendor="<%= vendor._id %>" class="add-product btn btn-sm btn-primary">Add Product<a>
+                                    <form class="delete-vendor-form" action="/vendor/<%= vendor._id %>?_method=DELETE" method="POST">
+                                        <a onclick="deleteProduct()" class="btn btn-sm btn-primary delete">Delete</a>
+                                    </form>
+                            </div>
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md">
+                                        <h5 class="card-title"><%= vendor.name %> - <%= vendor.storeName %></h5>
+                                        <p class="card-text"><%= vendor.address %></p>
+                                        <p class="card-text"><%= vendor.phone %></p>
+                                    </div>
+                                    <div class="col-md">
+                                        <p class="card-title">Total Amount - <%= vendor.total %></p>
+                                        <p class="card-title">Paid Amount - <%= vendor.paid %></p>
+                                        <p class="card-title">Balance - <%= vendor.total - vendor.paid %></p>
+                                        <p class="card-title">Total Products - <%= products.length %></p>
+                                    </div>
+                                    <div class="col-md">
+                                        <p class="card-title">Bank Name: <%= vendor.bank.accountBank %></p> 
+                                        <p class="card-title">Ac Name: <%= vendor.bank.accountName %></p> 
+                                        <p class="card-title">Ac IFSC: <%= vendor.bank.accountIFSC %></p> 
+                                        <p class="card-title">Ac Number: <%= vendor.bank.accountNumber %></p> 
+                                    </div>                         
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- <div class="vendor-details">
                     <h5 class="vendor store-name">Store Name: <%= vendor.storeName %></h5>
                     <h6 class="vendor name-display">Name: <%= vendor.name %></h6>
                     <h6 class="vendor store-address">Address: <%= vendor.address %></h6>
@@ -21,9 +75,9 @@
                     <% for(image of vendor.images){ %>
                 <img style="height: 200px;" src="<%= image.url %>" alt="">
                 <% } %> 
-                </div>
+                </div> -->
             </div>
-            <div class="vendor-buttons">
+            <!-- <div class="vendor-buttons">
                 <h5>Paid Amount - <%= vendor.paid %></h5>
                 <h5>Total Amount - <%= vendor.total %></h5>
                 <h5>Balance - <%= vendor.total - vendor.paid %></h5>
@@ -34,7 +88,7 @@
                 </form>
                 <form action="/view-vendor/edit/<%= vendor._id %>">
                 <button class="btn btn-secondary">EDIT</button></form>
-            </div>
+            </div> -->
             <section class="products-info">
                 <table>
                     <thead>

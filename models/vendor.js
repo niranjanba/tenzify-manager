@@ -54,11 +54,13 @@ const vendorSchema = new mongoose.Schema({
         },
         accountBank: {
             type: String,
-            required: true
+            required: true,
+            uppercase: true
         },
         accountIFSC: {
             type: String,
-            required: true
+            required: true,
+            uppercase: true
         },
         accountNumber: {
             type: String,
